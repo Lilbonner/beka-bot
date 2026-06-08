@@ -1,0 +1,17 @@
+{
+  "name": "beks",
+  "version": "0.1.0",
+  "description": "Telegram-бот БЕКС: тихо собирает сообщения участников, а когда кто-то ливает — оживает и говорит его фразами (цепи Маркова + реальные цитаты).",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/index.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch src/index.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "grammy": "^1.30.0"
+  }
+}
