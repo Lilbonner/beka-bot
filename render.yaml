@@ -1,0 +1,31 @@
+# Render Blueprint для БЕКС.
+# Бот работает через long polling (не веб-сервер), поэтому это Background Worker.
+# SQLite живёт на постоянном диске — иначе данные сотрутся при каждом деплое.
+services:
+  - type: worker
+    name: beka-bot
+    runtime: node
+    plan: starter            # background worker требует платного плана
+    region: frankfurt
+    buildCommand: npm ci
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: BOT_TOKEN        # задать в дашборде (секрет)
+        sync: false
+      - key: CHAT_ID          # задать в дашборде
+        sync: false
+      - key: DB_PATH
+        value: /var/data/beks.db
+      - key: TRIGGER_PROBABILITY
+        value: "0.18"
+      - key: IDLE_MINUTES
+        value: "60"
+      - key: MIN_MESSAGES
+        value: "20"
+      - key: SHOW_GHOST_NAME
+        value: "false"
+    disk:
+      name: beka-data
+      mountPath: /var/data
+      sizeGB: 1
